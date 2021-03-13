@@ -6,33 +6,22 @@
 //
 
 import UIKit
-import MapKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
-    private lazy var mapView: MKMapView = {
-        let map = MKMapView()
-        map.translatesAutoresizingMaskIntoConstraints = false
-        return map
+    lazy var mapViewController: MapViewController = {
+        let viewController = MapViewController()
+        return viewController
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        mapViewController.requestLocation()
     }
 
     private func setupView() {
-        self.view.addSubview(mapView)
-        setupConstraints()
-    }
-
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            mapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            mapView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-        ])
+        self.add(mapViewController)
     }
 
 }
